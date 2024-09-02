@@ -1,0 +1,4 @@
+let rvs= ["아이린", "슬기", "웬디", "조이", "예리"]
+let rvImages = ["rv1","rv2","rv3","rv4","rv5","rv6","rv7"]
+let rvInfo = ["아이린", "슬기", "웬디", "조이", "예리"]
+let sfSymbols = ["heart","heart.fill","house","house.fill","person","person.3"]
