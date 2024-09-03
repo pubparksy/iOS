@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     let rvImg = ["rv1", "rv2", "rv3", "rv4", "rv5"]
     let rvNm = ["irene", "seulgi", "wendy", "joy", "yeri"]
     let rvBirth = ["91.03.29", "94.02.10","94.02.21","96.09.03","99.03.05"]
+    let sfSymbols = ["heart","heart.fill","house","house.fill","person","person.3"]
+    // imageView.image = UIImage(systemName: "bolt.heart.fill")
     
     var rvIdx = 0
 
@@ -48,6 +50,17 @@ class ViewController: UIViewController {
         }
         rvIdx = 0
         segmentControl.isEnabled = false
+        /**
+         // 이렇게 특정 idx에만 설정을 하드코딩으로 쓸 수도 있다
+         segmentControl.setTitle("네번째", forSegmentAt: 3)
+         segmentControl.setEnabled(true, forSegmentAt: 2)
+         segmentControl.selectedSegmentIndex = 3
+         **/
+        segmentControl.setTitle("네번째", forSegmentAt: 3)
+        segmentControl.setEnabled(true, forSegmentAt: 2)
+        segmentControl.selectedSegmentIndex = 1
+        
+        
         
         
         slider.maximumValue = 33
