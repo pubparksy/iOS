@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var label2: UILabel!
+    
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var status: UIProgressView!
     @IBOutlet weak var stepper: UIStepper!
@@ -33,141 +34,68 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        switch1.isOn = false
-        imageView.image = UIImage(named: "reveluv")
-        label1.text = "ReVeLuv"
-        btnLeft.isEnabled = false
-        btnRight.isEnabled = false
-        label1.numberOfLines = 2
-        pageControl.numberOfPages = 0
-        pageControl.currentPage = 0
-
-
-        segmentControl.removeAllSegments()
+        pageControl.numberOfPages = rvImg.count
+        
+        
+        segmentControl.removeAllSegments() // segTitle 디폴트 세팅 삭제
         for segTitle in rvNm {
             segmentControl.insertSegment(withTitle: segTitle, at: rvIdx, animated: false)
             rvIdx += 1
         }
-        rvIdx = 0
-        segmentControl.isEnabled = false
-        /**
-         // 이렇게 특정 idx에만 설정을 하드코딩으로 쓸 수도 있다
-         segmentControl.setTitle("네번째", forSegmentAt: 3)
-         segmentControl.setEnabled(true, forSegmentAt: 2)
-         segmentControl.selectedSegmentIndex = 3
-         **/
-        segmentControl.setTitle("네번째", forSegmentAt: 3)
-        segmentControl.setEnabled(true, forSegmentAt: 2)
-        segmentControl.selectedSegmentIndex = 1
-        
-        
-        
+        rvIdx = 0 // segTitle 땜에 돌려주고 초기화
         
         slider.maximumValue = 33
         slider.minimumValue = 25
-        slider.value = 0
-        
-        label2.text = nil
-        
+ 
         stepper.maximumValue = 10
         stepper.minimumValue = 0
         stepper.stepValue = 1
-        stepper.value = 0
-        label3.text = "\(Int(stepper.value)) ❤️"
         
-        status.progress = 0.0
-        
+        switch1.isOn = false
+        disabled()
     }
 
     @IBAction func actSwitch(_ sender: Any) {
+
         if switch1.isOn {
-            rvIdx = 0
+            btnLeft.isEnabled = true
+            btnRight.isEnabled = true
+            pageControl.isEnabled = true
+            segmentControl.isEnabled = true
+            slider.isEnabled = true
+            stepper.isEnabled = true
+            
+            changeRvImgRvInfo(rvIdx)
+
             imageView.image = UIImage(named: "rv_group")
             label1.text = "Happiness!"
-            btnRight.isEnabled = true
-            pageControl.numberOfPages = rvImg.count
-            pageControl.currentPage = rvIdx
-            segmentControl.isEnabled = true
+
         } else {
-            rvIdx = 0
-            imageView.image = UIImage(named: "reveluv")
-            label1.text = "ReVeLuv"
-            btnLeft.isEnabled = false
-            btnRight.isEnabled = false
-            
-            pageControl.numberOfPages = 0
-            pageControl.currentPage = 0
-            segmentControl.isEnabled = false
-            segmentControl.selectedSegmentIndex = -1
-            
-            label2.text = nil
-            label3.text = nil
+            disabled()
         }
+        
     }
     
     @IBAction func actLeft(_ sender: Any) {
         rvIdx -= 1
-        btnLeft.isEnabled = true
-        btnRight.isEnabled = true
-        imageView.image = UIImage(named: rvImg[rvIdx])
-        label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        pageControl.currentPage = rvIdx
-        if rvIdx == 0 {
-            btnLeft.isEnabled = false
-        }
+        changeRvImgRvInfo(rvIdx)
         segmentControl.selectedSegmentIndex = -1
     }
     
     @IBAction func actRight(_ sender: Any) {
         rvIdx += 1
-        btnLeft.isEnabled = true
-        btnRight.isEnabled = true
-        imageView.image = UIImage(named: rvImg[rvIdx])
-        label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        pageControl.currentPage = rvIdx
-        
-        if rvIdx == rvImg.count - 1 {
-            btnRight.isEnabled = false
-        }
+        changeRvImgRvInfo(rvIdx)
         segmentControl.selectedSegmentIndex = -1
     }
     
-    
+    @IBAction func changePage(_ sender: UIPageControl) {
+        rvIdx = sender.currentPage
+        changeRvImgRvInfo(rvIdx)
+    }
     
     @IBAction func actSegmentChanged(_ sender: Any) {
         rvIdx = segmentControl.selectedSegmentIndex
-        
-        if rvIdx == 0 {
-            btnLeft.isEnabled = false
-            btnRight.isEnabled = true
-        } else if rvIdx == rvImg.count - 1 {
-            btnLeft.isEnabled = true
-            btnRight.isEnabled = false
-        } else {
-            btnLeft.isEnabled = true
-            btnRight.isEnabled = true
-        }
-        
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            imageView.image = UIImage(named: rvImg[rvIdx])
-            label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        case 1:
-            imageView.image = UIImage(named: rvImg[rvIdx])
-            label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        case 2:
-            imageView.image = UIImage(named: rvImg[rvIdx])
-            label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        case 3:
-            imageView.image = UIImage(named: rvImg[rvIdx])
-            label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        case 4:
-            imageView.image = UIImage(named: rvImg[rvIdx])
-            label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
-        default:
-            imageView.image = nil
-            label1.text = ""
-        }
+        changeRvImgRvInfo(rvIdx)
     }
     
     @IBAction func actSliderValueChange(_ sender: Any) {
@@ -175,28 +103,67 @@ class ViewController: UIViewController {
         label2.text = "멤버들 나이는 \(Int(slider.value))살"
     }
     
+    
+    
+    
+    
     @IBAction func actStepperValueChange(_ sender: Any) {
         label3.text = "\(Int(stepper.value)) ❤️"
 //        let temp = "0.\(stepper.value)"
         status.setProgress(Float(stepper.value), animated: true)
     }
     
-    @IBAction func changePage(_ sender: UIPageControl) {
-        rvIdx = sender.currentPage
-        rvIdx = pageControl.currentPage
 
+    
+    
+    
+    func changeRvImgRvInfo(_ rvIdx:Int) {
+        imageView.image = UIImage(named: rvImg[rvIdx])
+        label1.numberOfLines = 2
+        label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
+        pageControl.currentPage = rvIdx
+        
         btnLeft.isEnabled = true
         btnRight.isEnabled = true
-        imageView.image = UIImage(named: rvImg[rvIdx])
-        label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
         if rvIdx == 0 {
             btnLeft.isEnabled = false
-        }
-        if rvIdx == rvImg.count - 1 {
+        } else if rvIdx == rvImg.count - 1 {
             btnRight.isEnabled = false
         }
-        
     }
+    
+    func disabled() {
+        rvIdx = 0
+        
+        btnLeft.isEnabled = false
+        btnRight.isEnabled = false
+        imageView.image = UIImage(named: "reveluv")
+        label1.text = "ReVeLuv"
+        
+        pageControl.currentPage = 0
+        pageControl.isEnabled = false
+
+        segmentControl.isEnabled = false
+        segmentControl.selectedSegmentIndex = -1
+        
+        /**
+         // 이렇게 특정 idx에만 설정을 하드코딩으로 쓸 수도 있다
+         segmentControl.setTitle("네번째", forSegmentAt: 3)
+         segmentControl.setEnabled(true, forSegmentAt: 2)
+         segmentControl.selectedSegmentIndex = 3
+         **/
+        
+        slider.value = 0
+        slider.isEnabled = false
+        
+        label2.text = nil
+        
+        label3.text = "0 ❤️"
+        status.progress = 0
+        stepper.value = 0
+        stepper.isEnabled = false
+    }
+    
     
 }
 
