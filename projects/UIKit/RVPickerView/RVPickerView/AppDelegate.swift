@@ -1,15 +1,13 @@
 //
 //  AppDelegate.swift
-//  RedVelvet
+//  RVPickerView
 //
-//  Created by soyoung Park on 9/1/24.
+//  Created by 박소영 on 9/3/24.
 //
 
 import UIKit
 
 @main
-
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 

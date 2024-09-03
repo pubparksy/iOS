@@ -87,6 +87,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" systemColor="darkTextColor"/>
+                                <connections>
+                                    <action selector="changePage:" destination="BYZ-38-t0r" eventType="valueChanged" id="e3j-af-kTj"/>
+                                </connections>
                             </pageControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld4-Z9-9tq">
                                 <rect key="frame" x="173" y="719" width="75" height="21"/>
@@ -124,7 +127,7 @@
                         <outlet property="label1" destination="g4g-dp-W9n" id="hQ9-E2-jt7"/>
                         <outlet property="label2" destination="rzI-Rx-34u" id="TWq-N6-BHT"/>
                         <outlet property="label3" destination="Ld4-Z9-9tq" id="UF4-Rs-uUo"/>
-                        <outlet property="pageControl" destination="51Y-OG-Q6s" id="ADG-Yi-rly"/>
+                        <outlet property="pageControl" destination="51Y-OG-Q6s" id="YIF-1R-zHt"/>
                         <outlet property="segmentControl" destination="92x-j7-Gqo" id="Enl-NX-hRm"/>
                         <outlet property="slider" destination="q8L-lO-t4r" id="38U-PM-88Q"/>
                         <outlet property="status" destination="cT8-6r-Egc" id="TVb-uv-jUb"/>

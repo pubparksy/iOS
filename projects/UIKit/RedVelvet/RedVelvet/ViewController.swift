@@ -168,6 +168,22 @@ class ViewController: UIViewController {
         status.setProgress(Float(stepper.value), animated: true)
     }
     
+    @IBAction func changePage(_ sender: UIPageControl) {
+        rvIdx = sender.currentPage
+        rvIdx = pageControl.currentPage
+
+        btnLeft.isEnabled = true
+        btnRight.isEnabled = true
+        imageView.image = UIImage(named: rvImg[rvIdx])
+        label1.text = "\(rvNm[rvIdx])\n\(rvBirth[rvIdx])"
+        if rvIdx == 0 {
+            btnLeft.isEnabled = false
+        }
+        if rvIdx == rvImg.count - 1 {
+            btnRight.isEnabled = false
+        }
+        
+    }
     
 }
 
