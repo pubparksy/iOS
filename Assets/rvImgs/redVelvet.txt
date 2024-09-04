@@ -1,4 +1,13 @@
-let rvs= ["아이린", "슬기", "웬디", "조이", "예리"]
+let rvs = ["아이린", "슬기", "웬디", "조이", "예리"]
 let rvImages = ["rv1","rv2","rv3","rv4","rv5","rv6","rv7"]
-let rvInfo = ["아이린", "슬기", "웬디", "조이", "예리"]
+let rvInfo = ["리더, 배주현, 대구, 1991년 3월 29일,158cm, A형, 225mm"
+, "메인댄서, 강슬기, 안산, 1994년 2월 10일, 161cm, A형, 230mm"
+, "메인보컬, 손승완, 서울, 1994년 2월 21일, 160cm, O형, 235mm"
+, "리드래퍼, 박수영, 제주, 1996년 9월 3일, 167cm, A형, 240mm"
+, "서브보컬, 김예림, 서울, 1999년 3월 5일, 158cm, O형, 225mm"]
+let sfSymbols = ["cloud.sleet","fleuron","metronome","theatermasks.fill","fireworks","bird"]
+    
+
+
 let sfSymbols = ["heart","heart.fill","house","house.fill","person","person.3"]
+
