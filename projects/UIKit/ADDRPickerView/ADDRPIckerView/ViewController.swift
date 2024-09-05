@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     , "제주" : ["서귀포시", "제주시"]]
     
     let addrImgs = ["addr1","addr2","addr3","addr4"]
+    var arrStr:[String]?
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var imageView: UIImageView!
@@ -26,6 +27,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         pickerView.dataSource = self
         pickerView.delegate = self
+        
+        lbl1.text = addrSido[0]
+        txtView.text = addrDic[addrSido[pickerView.selectedRow(inComponent: 0)]]?.joined(separator: ", ")
+        
     }
 
 
@@ -34,54 +39,26 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        /**
-         만약 let addrSido 대신
-         let addrDic의 Key값들을 따로? 배열로 쓰고 싶으면?
-         addrDic.keys 는 또다시 Dic<String:<String>> 이래서
-         for key in addrDic.keys 로 써야만 key가 string으로 나오던데
-        그럼 따로 배열 변수를 선언해서 담을 걸 써야하나..?
-         
-         
-         */
 
-        
         if component == 0 {
             return addrDic.keys.count
         } else {
-        
-        
-            var numberOfRows = 0
             
-// 1)
-//            for sido in addrDic.keys {
-//                if addrSido[pickerView.selectedRow(inComponent: 0)] == sido {
-//                    if let cnt = addrDic[sido]?.count {
-//                        numberOfRows = cnt
-//                    }
-//                }
-//            }
-
-            
-            
-// 2)
-            var arrSido = [String]()
-            for (key,_) in addrDic {
-                arrSido.append(key)
-            }
-            for _ in 0..<arrSido.count {
-                if let val = addrDic[arrSido[pickerView.selectedRow(inComponent: 0)]] {
-                    numberOfRows = val.count
+            if let arrStr {
+                return arrStr.count
+            } else {
+                arrStr = addrDic[addrSido[0]]
+                guard let arrStr = arrStr else {
+                    return 0
                 }
+                return arrStr.count
             }
-      
             
             
-            return numberOfRows
         }
      }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
         if component == 0 {
             let imageView = UIImageView()
             imageView.image = UIImage(named: addrImgs[row])
@@ -90,9 +67,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
             let lbl = UILabel()
             let sidoIdx = pickerView.selectedRow(inComponent: 0)
-            if let arr = addrDic[addrSido[sidoIdx]] { // value의 총 갯수. 각 지역구 총 갯수
-                for _ in 0..<arr.count {
-                    lbl.text = arr[row]
+            if let gus = addrDic[addrSido[sidoIdx]] { // value의 총 갯수. 각 지역구 총 갯수
+                for _ in 0 ..< gus.count  { // i: 0~33
+                    lbl.text = gus[row]
                 }
             }
             lbl.textAlignment = .center
@@ -107,11 +84,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             imageView.image = UIImage(named: addrImgs[row])
             imageView.contentMode = .scaleAspectFill
             lbl1.text = addrSido[pickerView.selectedRow(inComponent: 0)]
+            arrStr = addrDic[addrSido[pickerView.selectedRow(inComponent: 0)]]
             txtView.text = addrDic[addrSido[pickerView.selectedRow(inComponent: 0)]]?.joined(separator: ", ")
             pickerView.reloadComponent(1)
-            
         } else {
-
             
         }
         
