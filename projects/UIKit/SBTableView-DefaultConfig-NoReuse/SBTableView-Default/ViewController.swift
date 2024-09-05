@@ -66,6 +66,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         arrMenus = arrDicNms[kind]
         
         let cell = UITableViewCell() // 액자 틀 생성
+        
+        print(cell)
+        
         var config = cell.defaultContentConfiguration()
         
         config.text = arrMenus?[indexPath.row]
