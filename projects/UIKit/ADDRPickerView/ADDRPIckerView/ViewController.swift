@@ -15,6 +15,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     , "서울" : ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"]
     , "제주" : ["서귀포시", "제주시"]]
     
+    let landMarks = ["이케아", "성심당", "한강", "귤"]
+    
     let addrImgs = ["addr1","addr2","addr3","addr4"]
     var arrStr:[String]?
     
@@ -33,7 +35,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
 
-
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        50
+    }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         2
     }
@@ -65,6 +69,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             imageView.contentMode = .scaleAspectFit
             return imageView
         } else {
+            
+            
             let lbl = UILabel()
             let sidoIdx = pickerView.selectedRow(inComponent: 0)
             if let gus = addrDic[addrSido[sidoIdx]] { // value의 총 갯수. 각 지역구 총 갯수
@@ -73,6 +79,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
             }
             lbl.textAlignment = .center
+            
             return lbl
         }
     }
@@ -87,11 +94,26 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             arrStr = addrDic[addrSido[pickerView.selectedRow(inComponent: 0)]]
             txtView.text = addrDic[addrSido[pickerView.selectedRow(inComponent: 0)]]?.joined(separator: ", ")
             pickerView.reloadComponent(1)
+            pickerView.selectRow(0, inComponent: 1, animated: true)
         } else {
-            
+            txtView.text = arrStr?[pickerView.selectedRow(inComponent: 1)]
         }
         
     }
+    
+    
+    @IBAction func alertLandMark(_ sender: Any) {
+        let selected = pickerView.selectedRow(inComponent: 0)
+        let landMark = landMarks[selected]
+        let alert = UIAlertController(title: "여기 \(addrSido[selected])엔", message: "\(landMark)!", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "좋아요", style: .default)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+        
+    }
+    
     
 }
 

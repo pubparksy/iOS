@@ -32,10 +32,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fA2-Zy-fCQ">
-                                <rect key="frame" x="256" y="390" width="75" height="35"/>
+                                <rect key="frame" x="258" y="388" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="alertLandMark:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SM7-3L-QsV"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" text="지역구" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MQf-a0-DbX">
                                 <rect key="frame" x="76" y="457" width="240" height="128"/>
