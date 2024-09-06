@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController_Default_NoReuse: UIViewController, UITableViewDataSource {
     let kinds = ["커피","프라푸치노","티","그 외"]
 
     let arrDicNms = ["커피":["에스프레소 콘 파나", "카라멜 마키아또", "바닐라 빈 라떼", "아이스 카페 모카", "사케라또 아포가토", "커피 스타벅스 더블 샷"]
