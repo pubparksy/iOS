@@ -18,21 +18,26 @@ class WebSearchViewController: UITableViewController {
     var iItemKey = ["title","link","thumbnail","sizeheight","sizewidth"]
     var vItemKey = ["title","author","play_time","datetime","url","thumbnail"]
 
+    var page = 1 {
+        didSet {
+            search(searchBar.text, page: page)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        search("Jazz")
-        
     }
     
     @IBOutlet weak var searchBar: UISearchBar!
     
 
-    func search(_ query:String) {
-        let endPoint1 = "https://openapi.naver.com/v1/search/webkr.json?query=\(query)&display=3"
-        let endPoint2 = "https://openapi.naver.com/v1/search/image?query=\(query)&display=3"
-        let endPoint3 = "https://dapi.kakao.com/v2/search/vclip?query=\(query)&size=3"
+    func search(_ query:String?, page:Int) {
+        guard let query else { return }
+        
+        let endPoint1 = "https://openapi.naver.com/v1/search/webkr.json?query=\(query)&display=10"
+        let endPoint2 = "https://openapi.naver.com/v1/search/image?query=\(query)&display=10"
+        let endPoint3 = "https://dapi.kakao.com/v2/search/vclip?query=\(query)&size=10"
         
 //      let url = URL(string: endPoint)
         guard let url1 = URL(string: endPoint1) else { return } // nil이면 더이상 진행이 의미없음. 멈춰.
@@ -223,7 +228,13 @@ class WebSearchViewController: UITableViewController {
             guard let web = webList?[indexPath.row] else { return cell }
             
             let wTitle = cell.viewWithTag(11) as? UILabel
-            wTitle?.text = web[self.wItemKey[0]] as? String
+            if let title = web[self.wItemKey[0]] as? String {
+                wTitle?.text = title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+            }
+            
+            
+            
+            
             let wDesc = cell.viewWithTag(12) as? UILabel
             wDesc?.text = web[self.wItemKey[1]] as? String
             
@@ -323,7 +334,7 @@ class WebSearchViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-            case 0: return 80
+            case 0: return 60
             case 1: return 100
             case 2: return 260
         default: return 0
@@ -334,4 +345,16 @@ class WebSearchViewController: UITableViewController {
         50
     }
     
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let detailVC
+//    }
+    
+}
+
+extension WebSearchViewController:UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        page = 1
+        searchBar.resignFirstResponder()
+    }
 }
