@@ -137,8 +137,29 @@
                             <outlet property="delegate" destination="uXs-2T-ifi" id="7He-mf-wVR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="예적금 상품" id="gG6-TH-rqH"/>
+                    <navigationItem key="navigationItem" title="예적금 상품" id="gG6-TH-rqH">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="h8T-1G-QYU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="oO7-XZ-LbE">
+                                <rect key="frame" x="16" y="5" width="87" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemMintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.left.fill" catalog="system"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ajr-au-f7J">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="XCR-nb-0et">
+                                <rect key="frame" x="290" y="5" width="87" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemMintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.right.fill" catalog="system"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="btnNext" destination="ajr-au-f7J" id="JqB-Zz-vah"/>
+                        <outlet property="btnPrev" destination="h8T-1G-QYU" id="RbO-Ia-D0n"/>
                         <outlet property="searchBar" destination="df2-4o-ma9" id="o0S-mS-QDG"/>
                     </connections>
                 </tableViewController>
@@ -194,9 +215,14 @@
         <segue reference="qIz-9M-Sep"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowshape.left.fill" catalog="system" width="128" height="104"/>
+        <image name="arrowshape.right.fill" catalog="system" width="128" height="104"/>
         <image name="bag.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemMintColor">
+            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

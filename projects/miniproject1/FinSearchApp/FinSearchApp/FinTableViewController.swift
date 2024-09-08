@@ -36,10 +36,14 @@ class FinTableViewController: UITableViewController {
     
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var btnPrev: UIBarButtonItem!
+    @IBOutlet weak var btnNext: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btnPrev.isHidden = true
+        btnNext.isHidden = true
     }
 
     // MARK: - Table view data source
@@ -80,7 +84,8 @@ class FinTableViewController: UITableViewController {
                 
                 
                 
-                /** 2.  금융회사별 보호대상 금융상품. 검색어가 전체 일치하게 금융회사목록에 있으면 파람 key를 다르게 설정('신한은행'으로는 되지만, '신한'은 안됨)  */
+                /** 2.  금융회사별 보호대상 금융상품. 검색어가 전체 일치하게 금융회사목록에 있으면 파람 key를 다르게 설정('신한은행'으로는 되지만, '신한'은 안됨) 
+                  + 1번 조회하고 2번 조회하면 1번 조회 때 로우가 잔재 */
                 if let hangulComNm = query {
                     if self.companyNmList.contains(hangulComNm) {
                         endPoint = "http://apis.data.go.kr/B190017/service/GetInsuredProductService202008/getProductList202008?serviceKey=\(self.encodingKey)&resultType=json&pageNo=1&numOfRows=100&fncIstNm=\(searchKeyword)"
@@ -102,23 +107,34 @@ class FinTableViewController: UITableViewController {
                         else { return }
                         
                         for prd in item {
-                            if let dt = prd["prdSalDscnDt"] {
-                                if dt == "" {
+                            
+                            if let dt = prd["prdSalDscnDt"],
+                                   dt == "" {
                                     
                                     if let val1 = prd["prdNm"],
                                        let val2 = prd["fncIstNm"],
-                                       let val3 = prd["prdNm"]
-                                    {
+                                       let val3 = prd["prdNm"] {
                                         self.itemPrdNmList.append(val1)
                                         self.itemFncIstNmList.append(val2)
                                         self.itemRegDateList.append(val3)
                                         self.itemPrdSalDscnDtList.append("진행중")
                                     }
                                     
-                                } else {
-                                    // 판매중단 상품까지 담으려면 여기
-                                }
+                            } else {
+                                // 판매중단 상품까지 담으려면 여기
+//                                if let val1 = prd["prdNm"],
+//                                   let val2 = prd["fncIstNm"],
+//                                   let val3 = prd["prdNm"],
+//                                   let val4 = prd["prdSalDscnDt"] {
+//                                    self.itemPrdNmList.append(val1)
+//                                    self.itemFncIstNmList.append(val2)
+//                                    self.itemRegDateList.append(val3)
+//                                    self.itemPrdSalDscnDtList.append(val4)
+//                                }
+                                
                             }
+                            
+                            
                         }
                         
                         
@@ -138,7 +154,7 @@ class FinTableViewController: UITableViewController {
             }
         }
         task.resume()
-        
+
         
     }
     
@@ -148,21 +164,13 @@ class FinTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let txt = searchBar.text {
-            if txt != "" {
+        if let txt = searchBar.text,
+               txt != "" {
                 
                 switch section {
                 case 0: return itemPrdNmList.count
                 default:return 0
                 }
-            }else {
-                switch section {
-                case 0: return bank.count
-                case 1: return nonBank.count
-                case 2: return ivmCom.count
-                default:return 0
-                }
-            }
         } else {
             switch section {
             case 0: return bank.count
@@ -170,25 +178,16 @@ class FinTableViewController: UITableViewController {
             case 2: return ivmCom.count
             default:return 0
             }
-            
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let txt = searchBar.text{
-            if txt != "" {
+        if let txt = searchBar.text,
+            txt != "" {
                 switch section {
                 case 0: return "검색 결과"
                 default:return ""
                 }
-            } else {
-                switch section {
-                case 0: return "은행"
-                case 1: return "비은행"
-                case 2: return "증권회사"
-                default:return ""
-                }
-            }
         } else {
             switch section {
             case 0: return "은행"
@@ -199,17 +198,17 @@ class FinTableViewController: UITableViewController {
         }
     }
     
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         50
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.deleteRows(at: [indexPath], with: .automatic)
         var cell = tableView.dequeueReusableCell(withIdentifier: "bank", for: indexPath)
         
-        if let txt = searchBar.text{
-            if txt != "" {
+        if let txt = searchBar.text,
+               txt != "" {
                 
                 if indexPath.section == 0 {
                     cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
@@ -227,22 +226,10 @@ class FinTableViewController: UITableViewController {
 //                  lbl?.text = bank[indexPath.row]
                 }
                 
+                btnPrev.isHidden = false
+                btnPrev.isEnabled = false
+                btnNext.isHidden = false
                 
-            } else {
-                if indexPath.section == 0 {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "bank", for: indexPath)
-                    let lbl = cell.viewWithTag(11) as? UILabel
-                    lbl?.text = bank[indexPath.row]
-                } else if indexPath.section == 1 {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "nonBank", for: indexPath)
-                    let lbl = cell.viewWithTag(21) as? UILabel
-                    lbl?.text = nonBank[indexPath.row]
-                } else if indexPath.section == 2 {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "ivmCom", for: indexPath)
-                    let lbl = cell.viewWithTag(31) as? UILabel
-                    lbl?.text = ivmCom[indexPath.row]
-                }
-            }
         } else {
             if indexPath.section == 0 {
                 cell = tableView.dequeueReusableCell(withIdentifier: "bank", for: indexPath)
@@ -257,7 +244,8 @@ class FinTableViewController: UITableViewController {
                 let lbl = cell.viewWithTag(31) as? UILabel
                 lbl?.text = ivmCom[indexPath.row]
             }
-            
+            btnPrev.isHidden = true
+            btnNext.isHidden = true
         }
 
         return cell
