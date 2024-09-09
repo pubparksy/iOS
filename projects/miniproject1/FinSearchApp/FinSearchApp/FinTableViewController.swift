@@ -8,13 +8,13 @@
 import UIKit
 
 class FinTableViewController: UITableViewController {
-    /** 공공데이터 키 필요 */
-    let encodingKey = "lzyJeCYYMKxGYIApLDSl0ALEqxtoOlDd6ksRAPMZ49UYFq5vIAfGYOcURSWKp0zy9DX18dtHAL28MVbL64Dvgw%3D%3D"
-    
     /** 현시점 중앙은행 [국내사이트 - 금융기관] 명시 기준 .  초기화면  section별 구분 후 선택 시 관련 기관 별 상품 조회하도록 DetailView? */
     let bank = ["국민은행", "신한은행", "우리은행", "하나은행", "한국스탠다드차타드은행", "중소기업은행"]
     let nonBank = ["(주)SBI저축은행", "(주)IBK저축은행", "(주)키움예스저축은행", "(주)키움저축은행", "푸른상호저축은행"]
     let ivmCom = ["KB증권주식회사", "엔에이치투자증권", "교보증권주식회사", "대신증권주식회사", "미래에셋증권 주식회사", "삼성증권 주식회사", "한국투자증권주식회사"]
+    
+    let bankImg = ["bank1", "bank2", "bank3", "bank4", "bank5", "bank6"]
+    let nonBankImg = ["nonBank1", "nonBank2", "nonBank3", "nonBank4", "nonBank5"]
     
     var companyList:[[String:String]]?
     var companyNmList:[String] = []
@@ -25,25 +25,11 @@ class FinTableViewController: UITableViewController {
     var itemRegDateList:[String] = []
     var itemPrdSalDscnDtList:[String] = []
     
-    
-    
-    var page = 1 
-    {
-        didSet {
-//            search(searchBar.text)
-        }
-    }
-    
-    
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var btnPrev: UIBarButtonItem!
-    @IBOutlet weak var btnNext: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        btnPrev.isHidden = true
-        btnNext.isHidden = true
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "customHeader")
     }
 
     // MARK: - Table view data source
@@ -61,34 +47,41 @@ class FinTableViewController: UITableViewController {
             }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            switch section {
-            case 0: return "은행"
-            case 1: return "비은행"
-            case 2: return "증권회사"
-            default:return ""
-            }
-    }
-    
-    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         50
     }
 
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "customHeader")
+        
+        switch section {
+            case 0:  header?.textLabel?.text = "은행"
+            case 1:  header?.textLabel?.text = "비은행"
+            case 2:  header?.textLabel?.text = "증권회사"
+            default: header?.textLabel?.text = ""
+        }
+        
+        header?.textLabel?.font = UIFont.boldSystemFont(ofSize: 21)
+        header?.textLabel?.textColor = .black
+
+        return header
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "init", for: indexPath)
+        let img = cell.viewWithTag(11) as? UIImageView
         let lbl = cell.viewWithTag(12) as? UILabel
         
         if indexPath.section == 0 {
+            img?.image = UIImage(named: bankImg[indexPath.row])
             lbl?.text = bank[indexPath.row]
         } else if indexPath.section == 1 {
+            img?.image = UIImage(named: nonBankImg[indexPath.row])
             lbl?.text = nonBank[indexPath.row]
         } else if indexPath.section == 2 {
+            img?.image = UIImage(systemName: "banknote")
             lbl?.text = ivmCom[indexPath.row]
         }
-        btnPrev.isHidden = true
-        btnNext.isHidden = true
 
         return cell
     }
@@ -110,18 +103,12 @@ class FinTableViewController: UITableViewController {
         } else {
             resultVC?.searchBarKeyword = searchBar.text
         }
-        
-        
-        
     }
-    
 
 }
 
 extension FinTableViewController:UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        page = 1
-        
         searchBar.resignFirstResponder()
         performSegue(withIdentifier: "result", sender: nil)
         
