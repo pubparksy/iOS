@@ -9,13 +9,25 @@ import UIKit
 
 class ResultViewController: UITableViewController {
     /** 공공데이터 키 필요 */
-    let encodingKey = "gtVy0VkDjshA%2Bmc%2BqliEWi82PAU1WsQxE93bXnZEa4wGDXnXBgA3ru1dS2Gr7JVpYwL3mmKdnYlUy93xdGIq8w%3D%3D"
+    let encodingKey = ""
     
     
     /** Segue 로 넘어온 데이터   */
     var selectedCompany:String?
     var searchBarKeyword:String?
-    var pageNo = 1
+    var pageNo = 1 {
+        didSet {
+            btnPrev.isEnabled = pageNo > 1
+            
+            if let totalCount,
+               (totalCount/(pageNo*10)) == 0 {
+                isEnd = true
+                btnNext.isEnabled = false
+            } else {
+                isEnd = false
+            }
+        }
+    }
     
     /** API 사용, 결과 데이터 */
     var query:String?
@@ -30,7 +42,7 @@ class ResultViewController: UITableViewController {
 
     var itemCount:Int?
     var totalCount:Int?
-    
+    var isEnd:Bool = false
     
     /** Paging Loading Image */
 //    lazy var cache: NSCache<AnyObject, UIImage> = NSCache()
@@ -56,6 +68,7 @@ class ResultViewController: UITableViewController {
         
         btnPrev.isEnabled = false
         btnNext.isEnabled = false
+        isEnd = false
         
         search2(query, pageNo:pageNo)
     }
@@ -124,7 +137,12 @@ class ResultViewController: UITableViewController {
                             , let totalCount = list["totalCount"] as? Int
                         else { return }
                         
+                        self.itemPrdNmList.removeAll()
+                        self.itemFncIstNmList.removeAll()
+                        self.itemPrdSalDscnDtList.removeAll()
+                        
                         for prd in item {
+                            
                             
                             if let val1 = prd["prdNm"],
                                let val2 = prd["fncIstNm"] {
@@ -147,15 +165,12 @@ class ResultViewController: UITableViewController {
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
 
+                            
                             if totalCount < 10 {
                                 self.btnPrev.isEnabled = false
                                 self.btnNext.isEnabled = false
-                            } else {
+                            } else if totalCount > 10, !self.isEnd {
                                 self.btnNext.isEnabled = true
-                            }
-                            
-                            if pageNo > 1 {
-                                self.btnPrev.isEnabled = true
                             }
                             
                         }
@@ -226,7 +241,6 @@ class ResultViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         /** Section Header Custom */
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "customHeader")
-        
         header?.textLabel?.numberOfLines = 2
         
         if let totalCount,

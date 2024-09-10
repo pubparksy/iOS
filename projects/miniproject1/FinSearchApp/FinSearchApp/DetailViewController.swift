@@ -20,7 +20,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         guard let itemPrdNm ,let itemFncIstNm else {return}
         let query = itemFncIstNm + " " + itemPrdNm
         search3(query)

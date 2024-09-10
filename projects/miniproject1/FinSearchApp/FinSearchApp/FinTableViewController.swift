@@ -127,4 +127,8 @@ extension FinTableViewController:UISearchBarDelegate {
         
     }
     
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
 }
