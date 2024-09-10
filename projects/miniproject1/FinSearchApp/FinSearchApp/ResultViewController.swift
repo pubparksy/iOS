@@ -9,9 +9,16 @@ import UIKit
 
 class ResultViewController: UITableViewController {
     /** 공공데이터 키 필요 */
-    let encodingKey = ""
+    let encodingKey = "gtVy0VkDjshA%2Bmc%2BqliEWi82PAU1WsQxE93bXnZEa4wGDXnXBgA3ru1dS2Gr7JVpYwL3mmKdnYlUy93xdGIq8w%3D%3D"
     
     
+    /** Segue 로 넘어온 데이터   */
+    var selectedCompany:String?
+    var searchBarKeyword:String?
+    var pageNo = 1
+    
+    /** API 사용, 결과 데이터 */
+    var query:String?
     var companyList:[[String:String]]?
     var companyNmList:[String] = []
     
@@ -20,29 +27,37 @@ class ResultViewController: UITableViewController {
     var itemFncIstNmList:[String] = []
     var itemRegDateList:[String] = []
     var itemPrdSalDscnDtList:[String] = []
-    
-    
-    var company:String?  // Segue로 받아와야함
-    var searchBarKeyword:String?
+
     var itemCount:Int?
     var totalCount:Int?
     
+    
+    /** Paging Loading Image */
+//    lazy var cache: NSCache<AnyObject, UIImage> = NSCache()
+    
     @IBOutlet weak var btnPrev: UIBarButtonItem!
-    @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var btnNext: UIBarButtonItem!
+    @IBOutlet weak var btnPageReadOnly: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "customHeader")
-        self.btnPrev.isHidden = true
-        self.btnNext.isHidden = true
-        print("뷰는 넘어옴!")
+        print("ResultView 도착")
         
-        if let company {
-            search2(company)
+        /** Section Header Custom */
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "customHeader")
+
+        /** Setting query by SelectedRow or SearchBar  */
+        if let selectedCompany {
+            query = selectedCompany
         } else {
-            search2(searchBarKeyword)
+            query = searchBarKeyword
         }
         
+        btnPrev.isEnabled = false
+        btnNext.isEnabled = false
+        
+        search2(query, pageNo:pageNo)
     }
     
     
@@ -53,7 +68,7 @@ class ResultViewController: UITableViewController {
     
     
     
-    func search2(_ query:String?) {
+    func search2(_ query:String?, pageNo:Int) {
         guard let searchKeyword = query?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
         /** 1.  보호대상 금융회사 목록 조회  */
@@ -84,17 +99,17 @@ class ResultViewController: UITableViewController {
                 
                 /** 2.  금융회사별 보호대상 금융상품 */
                 if let hangulComNm = query {
-                    
+                    /** 검색어가 금융사 명에 포함되어있으면 금융사명 파라미터 사용 / 없으면 상품명 파라미터 사용 */
                     for nm in self.companyNmList {
                         if nm.contains(hangulComNm) {
-                            endPoint = "http://apis.data.go.kr/B190017/service/GetInsuredProductService202008/getProductList202008?serviceKey=\(self.encodingKey)&resultType=json&pageNo=1&numOfRows=100&fncIstNm=\(searchKeyword)"
+                            endPoint = "http://apis.data.go.kr/B190017/service/GetInsuredProductService202008/getProductList202008?serviceKey=\(self.encodingKey)&resultType=json&pageNo=\(pageNo)&numOfRows=10&fncIstNm=\(searchKeyword)"
                             break
                         } else {
-                            endPoint = "http://apis.data.go.kr/B190017/service/GetInsuredProductService202008/getProductList202008?serviceKey=\(self.encodingKey)&resultType=json&pageNo=1&numOfRows=100&prdNm=\(searchKeyword)"
+                            endPoint = "http://apis.data.go.kr/B190017/service/GetInsuredProductService202008/getProductList202008?serviceKey=\(self.encodingKey)&resultType=json&pageNo=\(pageNo)&numOfRows=10&prdNm=\(searchKeyword)"
                         }
                     }
-                    
                 }
+                
                 guard let url = URL(string: endPoint) else { return }
                 request = URLRequest(url: url)
                 
@@ -126,17 +141,23 @@ class ResultViewController: UITableViewController {
                             
                         }
                         
-                        
                         self.totalCount = totalCount
                         self.itemCount = self.itemPrdNmList.count
-//                        
+                        
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
-                            if totalCount > 0 {
-                                self.btnPrev.isHidden = false
+
+                            if totalCount < 10 {
                                 self.btnPrev.isEnabled = false
-                                self.btnNext.isHidden = false
+                                self.btnNext.isEnabled = false
+                            } else {
+                                self.btnNext.isEnabled = true
                             }
+                            
+                            if pageNo > 1 {
+                                self.btnPrev.isEnabled = true
+                            }
+                            
                         }
                         
                     } catch {
@@ -185,14 +206,17 @@ class ResultViewController: UITableViewController {
             } else {
                 dsDt?.textColor = .black
             }
-        } else if itemCount == 0 {
-            let img = cell.viewWithTag(34) as? UIImageView
-            img?.image = nil
-            
-            let prdNm = cell.viewWithTag(31) as? UILabel
-            prdNm?.text = "검색 결과 없음"
-            prdNm?.textAlignment = .center
         }
+        
+        /** Paging Loading Image */
+//        if (cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil) {
+//            /// 해당 row에 해당되는 부분이 캐시에 존재하는 경우
+//            cell.imageView?.image = cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject)
+//        } else {
+//            /// 해당 row에 해당되는 부분이 캐시에 존재하지 않는 경우
+//        }
+        
+        
         
         return cell
     }
@@ -200,34 +224,35 @@ class ResultViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        /** Section Header Custom */
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "customHeader")
         
-        if let totalCount {
-            if let company {
-                header?.textLabel?.text = "'\(company)' 검색 결과 : 총 \(totalCount)개"
-            } else if let searchBarKeyword {
-                header?.textLabel?.text = "'\(searchBarKeyword)' 검색 결과 : 총 \(totalCount)개"
-            }
+        header?.textLabel?.numberOfLines = 2
+        
+        if let totalCount,
+           let query {
+            header?.textLabel?.text = "'\(query)' 검색 결과 : 총 \(totalCount)개 (\(pageNo)페이지)"
+            
         }
-        header?.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        header?.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         header?.textLabel?.textColor = .systemBlue
+        
+        
+        /** shadow custom */
+//        header?.layer.shadowColor = UIColor.white.cgColor
+//        header?.layer.masksToBounds = false
+//        header?.layer.shadowOffset = CGSize(width: 0, height: 4)
+//        header?.layer.shadowRadius = 5
+//        header?.layer.shadowOpacity = 0.5
+        
         
         return header
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        50
+        60
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     // MARK: - Navigation
 
@@ -243,4 +268,39 @@ class ResultViewController: UITableViewController {
     
     
 
+    @IBAction func actPrev(_ sender: Any) {
+        pageNo -= 1
+        search2(query, pageNo:pageNo)
+    }
+    
+    
+    @IBAction func actNext(_ sender: Any) {
+        pageNo += 1
+        search2(query, pageNo:pageNo)
+    }
+    
+}
+
+
+
+
+
+/** API Output 불필요 문자열 정규식 정리 코드 */
+extension String {
+    var stripHTML : String {
+        return self.replacingOccurrences(of: "<[^>]>", with: "", options: .regularExpression)
+    }
+    
+    
+    func stripOutHtml() -> String? {
+        do {
+            guard let data = self.data(using: .unicode) else { return nil }
+            
+            let attributed =
+            try NSAttributedString(data: data, options: [.documentType:NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return attributed.string
+        } catch  {
+            return nil
+        }
+    }
 }

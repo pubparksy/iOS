@@ -30,6 +30,18 @@ class FinTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "customHeader")
+        
+        tableView.layer.shadowColor = UIColor.black.cgColor
+        tableView.layer.masksToBounds = false
+        tableView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        tableView.layer.shadowRadius = 5
+        tableView.layer.shadowOpacity = 0.3
+        
+        
+        searchBar.tintColor = UIColor(cgColor: CGColor(red: 0.218, green: 0.247, blue: 0.234, alpha: 1))
+        
+
+        
     }
 
     // MARK: - Table view data source
@@ -99,10 +111,11 @@ class FinTableViewController: UITableViewController {
                 default: company = ""
             }
             
-            resultVC?.company = company
+            resultVC?.selectedCompany = company
         } else {
             resultVC?.searchBarKeyword = searchBar.text
         }
+        
     }
 
 }

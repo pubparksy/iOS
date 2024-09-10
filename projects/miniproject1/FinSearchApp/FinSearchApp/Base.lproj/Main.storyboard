@@ -12,13 +12,15 @@
         <scene sceneID="EDo-nb-7Bl">
             <objects>
                 <tableViewController id="uXs-2T-ifi" customClass="FinTableViewController" customModule="FinSearchApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Nzl-ZX-Vff">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Nzl-ZX-Vff">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" id="df2-4o-ma9">
+                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" text="" placeholder="검색" id="df2-4o-ma9">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            <offsetWrapper key="searchTextPositionAdjustment" horizontal="13" vertical="0.0"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="uXs-2T-ifi" id="d9c-cN-2nd"/>
@@ -26,10 +28,10 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="init" id="KL2-Ni-Jyw">
-                                <rect key="frame" x="0.0" y="94" width="393" height="70"/>
+                                <rect key="frame" x="20" y="99.333332061767578" width="353" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KL2-Ni-Jyw" id="8TF-81-jdd">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="은행" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1k-g8-KIs">
@@ -69,39 +71,40 @@
         <scene sceneID="PKf-bb-w6M">
             <objects>
                 <tableViewController id="Bqh-9c-cjD" customClass="ResultViewController" customModule="FinSearchApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Lzy-Ox-YTd">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Lzy-Ox-YTd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="result" id="OVg-hU-wRm">
-                                <rect key="frame" x="0.0" y="50" width="393" height="70"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="result" id="OVg-hU-wRm">
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OVg-hU-wRm" id="473-w5-Clf">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="322.66666666666669" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="34" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wonsign.arrow.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8nU-1F-OB4">
-                                            <rect key="frame" x="20" y="10" width="44" height="48"/>
+                                            <rect key="frame" x="11" y="17" width="44" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" systemColor="systemMintColor"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="31" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="상품명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAX-3v-mtV">
-                                            <rect key="frame" x="76" y="11" width="280" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="31" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="상품명" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAX-3v-mtV">
+                                            <rect key="frame" x="63" y="7" width="251" height="39"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="32" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="금융사" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDh-bd-aBT">
-                                            <rect key="frame" x="76" y="39" width="213" height="21"/>
+                                            <rect key="frame" x="63" y="48" width="197" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="33" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="판매여부" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZq-Ur-KLv">
-                                            <rect key="frame" x="327" y="40" width="52" height="18"/>
+                                            <rect key="frame" x="260" y="49" width="52" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
@@ -109,6 +112,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <segue destination="YBo-Dn-opc" kind="show" id="7Ww-sP-Oab"/>
                                 </connections>
@@ -121,32 +125,26 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="gBB-DM-QTA">
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" id="Nyb-gl-F5c">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Y7c-0a-S4s">
-                                    <rect key="frame" x="290" y="5" width="87" height="34.333333333333336"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.right" catalog="system"/>
-                                </button>
+                            <barButtonItem title="Item" image="arrowshape.right" catalog="system" id="whL-Cs-war">
+                                <connections>
+                                    <action selector="actNext:" destination="Bqh-9c-cjD" id="rCL-Q3-PmB"/>
+                                </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="c0z-cm-dsk">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="zGl-An-T6R">
-                                    <rect key="frame" x="195" y="5" width="87" height="34.333333333333336"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.left" catalog="system"/>
-                                </button>
+                            <barButtonItem title="Item" image="arrowshape.left" catalog="system" id="dbr-Go-2LQ">
+                                <connections>
+                                    <action selector="actPrev:" destination="Bqh-9c-cjD" id="jkr-M9-hK2"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnNext" destination="Y7c-0a-S4s" id="hPN-iN-CUc"/>
-                        <outlet property="btnPrev" destination="c0z-cm-dsk" id="Lvd-hr-IWf"/>
+                        <outlet property="btnNext" destination="whL-Cs-war" id="N0s-J2-O7g"/>
+                        <outlet property="btnPrev" destination="dbr-Go-2LQ" id="Ag7-ni-cGp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYa-mw-ZOp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1110.6870229007634" y="29.577464788732396"/>
+            <point key="canvasLocation" x="1118" y="-4"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="GMg-FG-en4">
@@ -176,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUg-zx-SgB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1951.9083969465648" y="41.549295774647888"/>
+            <point key="canvasLocation" x="1917" y="-4"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4cw-K4-nzZ">
@@ -192,9 +190,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WeN-vO-VuS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-617" y="-4"/>
+            <point key="canvasLocation" x="-544" y="-4"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="systemTealColor"/>
     <resources>
         <image name="arrowshape.left" catalog="system" width="128" height="104"/>
         <image name="arrowshape.right" catalog="system" width="128" height="104"/>
@@ -203,8 +202,14 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
