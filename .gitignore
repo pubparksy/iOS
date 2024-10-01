@@ -3,6 +3,9 @@
 
 ### ExpressionEngine ###
 .DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
 
 ### Nodejs ###
 node_modules/
