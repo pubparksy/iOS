@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모 목록</title>
+</head>
+<body>
+  <h2><%= name %>님 어서오세요!</h2>
+    <table border="1">
+        <thead>
+          <tr>
+            <th>아이디</th>
+            <th>습관 기록 메모</th>
+            <th>기록 생성일</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+          records.forEach(record=> {
+          %>
+          <tr>
+              <td><%= record.id %></td>
+              <td><%= record.memo %></td>
+              <td><%= record.createdAt %></td>
+              <td><a href="/delete/<%= record.id %>" style="text-decoration:none;">삭제</a></td>
+          </tr>
+          <% 
+          }); 
+          %>
+        </tbody>
+    </table>
+</body>
+</html>

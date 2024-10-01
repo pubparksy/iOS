@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모 목록</title>
+</head>
+<body>
+  <nav>
+    <a href="/habit_list">Home</a>
+    <a href="/habit_list">습관관리</a>
+    <a href="/register">회원가입</a>
+    <a href="/logout">로그아웃</a>
+  </nav>
+
+  <h2><%= name %>님 어서오세요!</h2>
+  <!-- (2) / 안 붙이면 localhost:3000/record_add 아니고 /record/record_add -->
+  <!--          (1)  이때 action="/record_add" == app.post("/record_add") 같아야함 -->
+  <form method="get" action="/record_add" >
+    <input type="text" name="habit_id" value="<%= habit_id %>" hidden>
+    <button type="submit">메모 추가</button> 
+  </form>
+    
+    <!-- <button type="button" onclick="location.href='/record_add/<%= habit_id %>'">메모 추가</button> -->
+
+    <table border="1">
+        <thead>
+          <tr>
+            <th>아이디</th>
+            <th>습관 기록 메모</th>
+            <th>기록 생성일</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+          records.forEach(record=> {
+          %>
+          <tr>
+              <td><%= record.id %></td>
+              <td><%= record.memo %></td>
+              <td><%= record.createdAt %></td>
+              <td><a href="/delete/<%= record.id %>" style="text-decoration:none;">삭제</a></td>
+          </tr>
+          <% 
+          }); 
+          %>
+        </tbody>
+    </table>
+</body>
+</html>

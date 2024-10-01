@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>습관 메모 추가</title>
+</head>
+<body>
+    <nav>
+        <a href="/habit_list">Home</a>
+        <a href="/habit_list">습관관리</a>
+        <a href="/register">회원가입</a>
+        <a href="/logout">로그아웃</a>
+    </nav>
+
+    <h2>습관 메모 추가</h2>
+
+    <form action="record_add" method="post">
+        <input type="text" name="habit_id" value="<%= habit_id %>" hidden>
+        <figure>
+            <p>
+                <label>습관 메모명</label>
+                <input type="text" name="memo">
+            </p>
+            <button type="submit">추가</button>
+        </figure>
+    </form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>습관 추가</title>
+</head>
+<body>
+    <nav>
+        <a href="/habit_list">Home</a>
+        <a href="/habit_list">습관관리</a>
+        <a href="/register">회원가입</a>
+        <a href="/logout">로그아웃</a>
+    </nav>
+
+    <h2>습관 추가</h2>
+
+    <form action="habit_add" method="post">
+        <figure>
+            <p>
+                <label>습관명</label>
+                <input type="text" name="habit_name">
+            </p>
+            <p>
+                <label>시작일</label>
+                <input type="date" name="start_dt">
+            </p>
+            <p>
+                <label>종료일</label>
+                <input type="date" name="end_dt">
+            </p>
+            <button type="submit">추가</button>
+        </figure>
+    </form>
+</body>
+</html>
