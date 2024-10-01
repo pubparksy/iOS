@@ -1,0 +1,8 @@
+# Created by https://www.toptal.com/developers/gitignore/api/macos,node,expressionengine
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,node,expressionengine
+
+### ExpressionEngine ###
+.DS_Store
+
+### Nodejs ###
+node_modules/
