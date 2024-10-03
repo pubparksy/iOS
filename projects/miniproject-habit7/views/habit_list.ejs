@@ -12,41 +12,43 @@
   </style>
   </head>
 <body>
-
-  <%- include("./nav.ejs") %>
   
-  <h2><%= name %>님 어서오세요!</h2>
+  <%- include("./nav.ejs") %>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-success" type="button" onclick="location.href='/habit_add'">습관 추가</button>
-    </div>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"> 
+      <h2><%= name %>님 어서오세요!</h2>
 
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>아이디</th>
-            <th>습관명</th>
-            <th>시작일 ~ 종료일</th>
-            <th>기록갯수</th>
-            <th>삭제</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <%
-          habits.forEach(habit=> {
-          %>
-          <tr>
-              <td><%= habit.id %></td>
-              <td><a href="/record/<%= habit.id %>" style="text-decoration:none; color:#32762c;"><%= habit.habit_name %></a></td>
-              <td><%= habit.start_dt %> ~ <%= habit.end_dt %></td>
-              <td><%= habit.count %></td>
-              <td><a href="/delete/<%= habit.id %>" style="text-decoration:none; color:#32762c;" onclick="return confirm('하위 메모까지 삭제됩니다. 진행하시겠습니까?'); return false;">삭제</a></td>
-          </tr>
-          <% 
-          }); 
-          %>
-        </tbody>
-    </table>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-success" type="button" onclick="location.href='/habit_add'">습관 추가</button>
+      </div>
+
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>아이디</th>
+              <th>습관명</th>
+              <th>시작일 ~ 종료일</th>
+              <th>기록갯수</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <%
+            habits.forEach(habit=> {
+            %>
+            <tr>
+                <td><%= habit.id %></td>
+                <td><a href="/record/<%= habit.id %>" style="text-decoration:none; color:#32762c;"><%= habit.habit_name %></a></td>
+                <td><%= habit.start_dt %> ~ <%= habit.end_dt %></td>
+                <td><%= habit.count %></td>
+                <td><a href="/delete/<%= habit.id %>" style="text-decoration:none; color:#32762c;" onclick="return confirm('하위 메모까지 삭제됩니다. 진행하시겠습니까?'); return false;">삭제</a></td>
+            </tr>
+            <% 
+            }); 
+            %>
+          </tbody>
+      </table>
+  </div>
 </body>
 <script type="text/javascript">
 

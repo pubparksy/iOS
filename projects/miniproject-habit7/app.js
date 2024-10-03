@@ -89,7 +89,7 @@ app.post("/login", (req, res)=> {
             res.status(500).send("Internal Server Error - login");
         } else {
             const result = row; // select 조회 결과는 1개. 불일치하면 비회원인거임.
-            console.log(result);
+            // console.log(result);
             if(result != undefined) {
 
                 req.session.user = {
@@ -233,12 +233,12 @@ app.post("/record_add", (req, res)=>{
     const { habit_id, memo } = req.body;
     const { id, name } = req.session.user;
     const createdAt = moment().format("YYYY-MM-DD");
-    console.log(habit_id);
+    // console.log(habit_id);
     let sql = `
                 insert into records (memo, createdAt, habit_id) 
                 values ('${memo}', '${createdAt}','${habit_id}')
                 `;
-    console.log(sql);
+    // console.log(sql);
     db.run(sql, (err)=>{
         if (err) {
             res.status(500).send("Interval Server Error - record insert");

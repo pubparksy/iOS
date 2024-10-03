@@ -1,7 +1,7 @@
 -- users
-insert into users (email, name, password) values ('s@com', '송','s1');
-insert into users (email, name, password) values ('l@com', '이','l1');
-insert into users (email, name, password) values ('k@com', '김','k1');
+insert into users (email, name, password) values ('s@com', '송송','s1');
+insert into users (email, name, password) values ('l@com', '이이','l1');
+insert into users (email, name, password) values ('k@com', '김김','k1');
 
 -- habits
 insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('오전 독서', '2024-09-01', '2024-09-03', '2024-09-01','1');
@@ -31,14 +31,18 @@ insert into records (memo, createdAt, habit_id) values ('첫번째 커피 : 과�
 insert into records (memo, createdAt, habit_id) values ('두번째 커피 : 에티오피아', '2024-09-11',3);
 insert into records (memo, createdAt, habit_id) values ('세번째 커피 : 브라질산토스', '2024-09-13',3);
 
-insert into records (memo, createdAt, habit_id) values ('첫번째 수영 오전1 : 배영', '2024-09-01',4);
-insert into records (memo, createdAt, habit_id) values ('두번째 수영 오전2 : 접영', '2024-09-01',4);
+insert into records (memo, createdAt, habit_id) values ('첫번째 저녁산책 : 한강', '2024-09-10',4);
+insert into records (memo, createdAt, habit_id) values ('두번째 저녁산책 : 둘레길', '2024-09-11',4);
+insert into records (memo, createdAt, habit_id) values ('세번째 저녁산책 : 동네공원', '2024-09-13',4);
 
-insert into records (memo, createdAt, habit_id) values ('첫번째 개발 : Linux', '2024-09-05',5);
-insert into records (memo, createdAt, habit_id) values ('두번째 개발 : Windows', '2024-09-15',5);
-insert into records (memo, createdAt, habit_id) values ('세번째 개발 : Mac', '2024-09-21',5);
+insert into records (memo, createdAt, habit_id) values ('첫번째 수영 오전1 : 배영', '2024-09-01',5);
+insert into records (memo, createdAt, habit_id) values ('두번째 수영 오전2 : 접영', '2024-09-01',5);
+
+insert into records (memo, createdAt, habit_id) values ('첫번째 개발 : Linux', '2024-09-05',6);
+insert into records (memo, createdAt, habit_id) values ('두번째 개발 : Windows', '2024-09-15',6);
+insert into records (memo, createdAt, habit_id) values ('세번째 개발 : Mac', '2024-09-21',6);
 
 
-insert into records (memo, createdAt, habit_id) values ('첫번째 수면1', '2024-09-06',6);
-insert into records (memo, createdAt, habit_id) values ('두번째 수면2', '2024-09-13',6);
-insert into records (memo, createdAt, habit_id) values ('세번째 수면3', '2024-12-01',6);
+insert into records (memo, createdAt, habit_id) values ('첫번째 밤 명상 - 수면1', '2024-09-06',7);
+insert into records (memo, createdAt, habit_id) values ('두번째 밤 명상 - 수면2', '2024-09-13',7);
+insert into records (memo, createdAt, habit_id) values ('세번째 밤 명상 - 수면3', '2024-12-01',7);
