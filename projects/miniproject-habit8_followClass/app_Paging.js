@@ -107,6 +107,10 @@ app.post("/login", (req, res)=> {
 })
 
 
+
+
+/** paging 소스 진행중... */
+
 // localhost:3000/login > localhost:3000/habit_list 
 app.get("/habit_list", (req, res)=>{
     if(req.session.user == undefined) {
@@ -115,30 +119,67 @@ app.get("/habit_list", (req, res)=>{
     }
     const { id, name } = req.session.user;
 
-    let sql = `select
-                h.id, h.habit_name , h.start_dt , h.end_dt , count(r.habit_id) count
-                from habits h
-                left outer join records r 
-                on h.id  = r.habit_id 
-                group by h.habit_name , h.start_dt , h.end_dt , r.habit_id
-                having h.user_id = '${id}'
-                order by h.id 
-                `;
-    db.all(sql, [], (err, rows)=> {
+
+
+    let page = req.query.page ? parseInt(req.query.page) : 1;
+    const limit = 5;
+    const offset = (page - 1) * limit;
+
+// id 말고 row number 주고 정렬하는 sql (강사님 코드)
+//     const list_sql = `
+//                     select
+//                     row_number() over(order by id) as rn,
+//                     id,
+//                     habit_name, start_date, end_date,
+//                     (select count(1) from records r where r.habit_id = h.id ) count
+//                     from habits h where user_id = ${user.id}
+//                     `;
+
+
+    const list_sql = `
+                    select
+                    row_number() over(order by id) as rn,
+                    id, habit_name, start_dt, end_dt,
+                    (select count(1) from records r where r.habit_id = h.id ) count
+                    from habits h 
+                    where user_id = ?
+                    limit ?
+                    offset ? 
+                    `;
+
+
+
+// 내가 만든 기존 쿼리
+//     let sql = `select
+//                 h.id, h.habit_name , h.start_dt , h.end_dt , count(r.habit_id) count
+//                 from habits h
+//                 left outer join records r 
+//                 on h.id  = r.habit_id 
+//                 group by h.habit_name , h.start_dt , h.end_dt , r.habit_id
+//                 having h.user_id = '${id}'
+//                 order by h.id 
+//                 `;
+
+
+// sql에 바로 ${id}를 적지 않고   ? 로 적고  db.all( , [id], )에 적을 수도 있다
+    db.all(sql, [user.id, limit, offset], (err, rows)=> {
         if (err) {
             res.status(500).send(`Internal Server Error(/habit_list) : ${err}`);
         } else {
-            const habits = rows;
-            // console.log(habits);
-            res.render("habit_list", {name: name, habits: habits});
+            db.get(`select count(1) as count from habits where user_id = ${user.id}`, (err, row)=> {
+                if (err) {
+                    res.status(500).send(`Internal Server Error(/habit_list 2) : ${err}`);
+                } else {
+                    console.log("여기까지 도달");
+
+                    const total = row.count; // 전체 게시글의 갯수
+                    const totalPage = Math.ceil(total/limit); // 총 페이지 갯수 계산
+                    res.render("habit_list", {name: name, habits: rows, currentPage: page, totalPage:totalPage });
+                }
+            })
         }
     })
 })
-
-
-
-
-
 
 
 

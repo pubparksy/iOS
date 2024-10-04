@@ -22,6 +22,13 @@ insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('�
 insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('습관14', '2024-09-26', '2024-10-20', '2024-09-26','1');
 insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('습관15', '2024-09-27', '2024-10-20', '2024-09-27','1');
 
+insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('습관16', '2024-09-28', '2024-10-20', '2024-09-28','1');
+insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('습관17', '2024-09-29', '2024-10-20', '2024-09-29','1');
+insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('습관18', '2024-09-30', '2024-10-20', '2024-09-30','1');
+insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('습관19', '2024-10-27', '2024-10-20', '2024-10-01','1');
+
+
+
 
 insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('오전 수영', '2024-09-01', '2024-09-01', '2024-09-01','2');
 insert into habits (habit_name, start_dt, end_dt, createdAt, user_id) values ('오후 개발', '2024-09-01', '2024-09-30', '2024-09-01','2');
