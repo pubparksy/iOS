@@ -1,0 +1,8 @@
+$ npm init -y
+$ npm i express nodemon babel node-fetch@2
+
+$ sudo npm i express nodemon babel node-fetch@2
+
+package.json
+  "scripts": {
+    "dev": "nodemon api.js",

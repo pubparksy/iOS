@@ -1,0 +1,11 @@
+$ npm init -y
+$ npm i express ejs express-session cookie-parser sqlite3 moment nodemon
+
+$ sudo npm i babel node-fetch@2
+
+
+
+package.json
+  "scripts": {
+    "api": "nodemon api.js",
+    "dev": "nodemon app.js",

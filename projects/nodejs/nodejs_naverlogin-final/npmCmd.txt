@@ -1,0 +1,9 @@
+$ npm init -y
+$ npm i express nodemon babel node-fetch@2
+
+$ sudo npm i express nodemon babel node-fetch@2
+
+package.json
+  "scripts": {
+    "dev2": "nodemon --exec babel-node 2_Nlogin_accessToken.js",
+    "dev3": "nodemon --exec babel-node 3_Nlogin_Final.js",
