@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>confirm 다루기1</title>
+    
+    <style>
+      .my_btn {
+        width: 600px;
+        height: 150px;
+        font-size: 50px;
+        font-weight: bold;
+        margin: 8%;
+        margin: 0 auto;
+        display: block;
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+
+    <script>
+      //===================================
+      //js->swift 사용자 정보 전달 web->native
+      function send1() {
+        webkit.messageHandlers.SendMessage.postMessage({}); // () 없이 보내면 이벤트 미발생
+      }
+
+      function send2() {
+        webkit.messageHandlers.SayHello.postMessage('아델!!');
+      }
+
+      function send3() {
+        var inputName = document.getElementById('name').value;
+        var info = {
+          name: inputName,
+          email: 'a@a.com',
+          phone: '010-1111-1111',
+          gender: 'male',
+        };
+        webkit.messageHandlers.SetUser.postMessage(info);
+      }
+
+      //===================================
+    </script>
+
+  </head>
+
+  <body>
+    <h1 class="title" id="title1">js->swift 사용자 정보 전달 web->native</h1>
+    <button class="my_btn" onclick="send1()" align="center">Post Message</button><br />
+    <button class="my_btn" onclick="send2()">Say Hello</button><br />
+    <input class="my_btn" type="text" name="firstname" id="name" value="홍길동"/><br />
+    <button class="my_btn" onclick="send3()">Set User Info</button><br />
+  </body>
+</html>

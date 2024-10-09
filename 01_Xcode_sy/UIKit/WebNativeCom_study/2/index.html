@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>confirm 다루기2</title>
+    <style>
+      .my_btn {
+        width: 600px;
+        height: 150px;
+        font-size: 50px;
+        font-weight: bold;
+        margin: 8%;
+        margin: 0 auto;
+        display: block;
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: bold;
+      }
+      input {
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+    <script>
+
+      //===================================
+      //swift->js native->web
+      function call_func1() {
+        document.getElementById('title1').innerText = 'call_func1';
+      }
+
+      function call_func2(title) {
+        document.getElementById('title1').innerText = title;
+      }
+
+      function call_func3(data) {
+        var obj = JSON.parse(data);
+        document.getElementById('title1').innerText = obj['name'];
+        obj.name = '우영우';
+        return obj;
+      }
+      //===================================
+    </script>
+  </head>
+  <body>
+    <h1 class="title" id="title1">swift->js native->web</h1>
+    <input class="my_btn" type="text" name="firstname" id="name" value="홍길동"/><br />
+  </body>
+</html>

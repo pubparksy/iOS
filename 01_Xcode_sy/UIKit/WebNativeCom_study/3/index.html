@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>confirm 다루기3</title>
+    <style>
+      .my_btn {
+        width: 600px;
+        height: 150px;
+        font-size: 50px;
+        font-weight: bold;
+        margin: 8%;
+        margin: 0 auto;
+        display: block;
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: bold;
+      }
+      input {
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+    <script>
+      function show_alert() {
+        if (!alert('alert입니다.'))
+          document.getElementById('title1').innerText = 'alert 확인';
+      }
+
+      function show_alert2() {
+        if (!alert('alert2입니다.'))
+          document.getElementById('title1').innerText = 'alert2 확인';
+      }
+      
+      function show_confirm() {
+        var result = confirm('컨펌입니다.\n~하시겠습니까?');
+        if (result === true) {
+          document.getElementById('title1').innerText = '확인';
+          console.log('확인');
+        } else if (result === false) {
+          document.getElementById('title1').innerText = '취소';
+          console.log('취소');
+        }
+      }
+
+      function show_confirm2() {
+        var result = confirm('컨펌2입니다.\n~하시겠습니까?');
+        if (result === true) {
+          document.getElementById('title1').innerText = '확인2';
+          console.log('확인2');
+        } else if (result === false) {
+          document.getElementById('title1').innerText = '취소2';
+          console.log('취소2');
+        }
+      }
+
+      function show_prompt() {
+        var result = prompt('내용을 입력하시오.', '기본값');
+        document.getElementById('title1').innerText = result;
+      }
+
+      function show_prompt2() {
+        var result = prompt('내용2을 입력하시오.', '기본값2');
+        document.getElementById('title1').innerText = result;
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1 class="title" id="title1">confirm 다루기3</h1>
+    <input class="my_btn" type="text" name="firstname" id="name" value="홍길동"/><br />
+    <button class="my_btn" onclick="show_alert()">Show Alert</button><br />
+    <button class="my_btn" onclick="show_alert2()">Show Alert2</button><br />
+    <button class="my_btn" onclick="show_confirm()">Show Confirm</button><br />
+    <button class="my_btn" onclick="show_confirm2()">Show Confirm2</button><br />
+    <button class="my_btn" onclick="show_prompt()">Show Prompt</button><br />
+    <button class="my_btn" onclick="show_prompt2()">Show Prompt2</button><br />
+  </body>
+</html>
