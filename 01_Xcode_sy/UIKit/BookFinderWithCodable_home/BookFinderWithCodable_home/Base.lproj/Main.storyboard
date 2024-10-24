@@ -84,7 +84,10 @@
                             <outlet property="delegate" destination="BTl-l4-RnB" id="rAY-nL-38M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="BookFinderWithCodable" id="G1Y-Tj-pod"/>
+                    <navigationItem key="navigationItem" title="BookFinderWithCodable" id="G1Y-Tj-pod">
+                        <barButtonItem key="leftBarButtonItem" image="arrowshape.left" catalog="system" id="QuH-ag-1tt"/>
+                        <barButtonItem key="rightBarButtonItem" image="arrowshape.right" catalog="system" id="PaP-dx-l3C"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="laO-tv-ADw" id="peM-Pb-uWj"/>
                     </connections>
@@ -141,6 +144,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.left" catalog="system" width="128" height="104"/>
+        <image name="arrowshape.right" catalog="system" width="128" height="104"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
