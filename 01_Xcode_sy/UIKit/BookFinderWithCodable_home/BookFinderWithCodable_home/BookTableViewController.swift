@@ -9,7 +9,6 @@ import UIKit
 
 class BookTableViewController: UITableViewController {
     
-    let apiKey = "KakaoAK d4aa8e5a1a4ee4636ae50f648c1cbbc1"
     var books:[Book]?
     var isEnd:Bool?
     
@@ -89,5 +88,13 @@ class BookTableViewController: UITableViewController {
     
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailVC = segue.destination as? DetailViewController
+        guard let indexPath = tableView.indexPathForSelectedRow,
+              let book = books?[indexPath.row]
+        else { return }
+        
+        detailVC?.strURL = book.url
+    }
     
  }
