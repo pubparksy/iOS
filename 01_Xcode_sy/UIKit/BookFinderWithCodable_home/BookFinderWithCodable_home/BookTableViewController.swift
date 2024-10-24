@@ -12,9 +12,17 @@ class BookTableViewController: UITableViewController {
     var books:[Book]?
     var isEnd:Bool?
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var page = 1  {// 검색은 언제나 검색결과를 새로 띄워주는거니까 1로 지정
+        didSet {
+            search(searchBar.text, page: 1)
+        } // 프로퍼티 옵저버
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        search(query: "한강", page: 1)
+//        search("한강", page: 1)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -26,7 +34,9 @@ class BookTableViewController: UITableViewController {
     }
 
 
-    func search(query:String, page:Int) {
+    func search(_ query:String?, page:Int) {
+        guard let query else { return }
+        
         let str = "https://dapi.kakao.com/v3/search/book?query=\(query)&page=\(page)" // 책 검색 api url
 
         guard let strURL = str.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -98,3 +108,11 @@ class BookTableViewController: UITableViewController {
     }
     
  }
+
+
+extension BookTableViewController:UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        page = 1
+        searchBar.resignFirstResponder()
+    }
+}
