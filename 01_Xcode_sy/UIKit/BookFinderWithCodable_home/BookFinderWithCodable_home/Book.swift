@@ -15,6 +15,8 @@ struct Book:Codable {
     let publisher:String
     let authors:[String]
     let thumbnail:String
+    let price:Int
+    let status:String
     let url: String
 }
 

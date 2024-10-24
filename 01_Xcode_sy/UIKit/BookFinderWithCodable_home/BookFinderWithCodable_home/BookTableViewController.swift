@@ -23,6 +23,7 @@ class BookTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        search("한강", page: 1)
+        tableView.sectionHeaderHeight = 100
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,7 +55,7 @@ class BookTableViewController: UITableViewController {
             guard let data,
                   let master = try? JSONDecoder().decode(Master.self, from: data)
             else { return }
-//            print(master)
+            print(master)
             self.books = master.books
             self.isEnd = master.meta.isEnd
             
@@ -79,8 +80,17 @@ class BookTableViewController: UITableViewController {
             
             let lblAuthors = cell.viewWithTag(3) as? UILabel
             let authors = book.authors
-            lblAuthors?.text = authors.joined(separator: ", ")
+            lblAuthors?.text = "저자 : " + authors.joined(separator: ", ")
             
+            let lblPublisher = cell.viewWithTag(4) as? UILabel
+            lblPublisher?.text = "출판사 : " + book.publisher
+        
+            let lblPrice = cell.viewWithTag(5) as? UILabel
+            lblPrice?.text = String(book.price) + "원"
+        
+            let lblStatus = cell.viewWithTag(6) as? UILabel
+            lblStatus?.text = book.status
+        
             let thumbnail = book.thumbnail
             if let url = URL(string: thumbnail) {
                 let request = URLRequest(url:url)
