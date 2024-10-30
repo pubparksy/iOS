@@ -1,0 +1,170 @@
+[
+    {
+        "id" : 101,
+        "schoolName": "Hogwarts",
+        "country": "United Kingdom",
+        "house": "Gryffindor",
+        "color": "Red, Gold",
+        "logo": "Lion",
+        "comment": "용기와 대담함을 중시한다.",
+        "coordinates": {
+            "latitude": 53.395518266436994,
+            "longitude": -3.0428566794599807
+        },
+        "imageNameSchool": "Hogwarts",
+        "imageNameHouse": "Gryffindor"
+    },
+    {
+        "id" : 102,
+        "schoolName": "Hogwarts",
+        "country": "United Kingdom",
+        "house": "Hufflepuff",
+        "color": "Yellow, Black",
+        "logo": "Badger",
+        "comment": "근면과 충성을 중시한다.",
+        "coordinates": {
+            "latitude": 53.395518266436994,
+            "longitude": -3.0428566794599807
+        },
+        "imageNameSchool": "Hogwarts",
+        "imageNameHouse": "Hufflepuff"
+    },
+    {
+        "id" : 103,
+        "schoolName": "Hogwarts",
+        "country": "United Kingdom",
+        "house": "Ravenclaw",
+        "color": "Blue, Bronze",
+        "logo": "Eagle",
+        "comment": "지혜와 창의성을 중시한다.",
+        "coordinates": {
+            "latitude": 53.395518266436994,
+            "longitude": -3.0428566794599807
+        },
+        "imageNameSchool": "Hogwarts",
+        "imageNameHouse": "Ravenclaw"
+    },
+    {
+        "id" : 104,
+        "schoolName": "Hogwarts",
+        "country": "United Kingdom",
+        "house": "Slytherin",
+        "color": "Green, Silver",
+        "logo": "Serpent",
+        "comment": "야망과 지도력을 중시한다.",
+        "coordinates": {
+            "latitude": 53.395518266436994,
+            "longitude": -3.0428566794599807
+        },
+        "imageNameSchool": "Hogwarts",
+        "imageNameHouse": "Slytherin"
+    },
+    
+    
+    {
+        "id" : 201,
+        "schoolName": "Beauxbatons",
+        "country": "France",
+        "house": "Écureuil",
+        "color": "Blue, Silver",
+        "logo": "Deer",
+        "comment": "우아함과 친절함을 중시한다.",
+        "coordinates": {
+            "latitude": 46.64075030926224,
+            "longitude": 2.475299826793599
+        },
+        "imageNameSchool": "Beauxbatons",
+        "imageNameHouse": "Écureuil"
+    },
+    {
+        "id" : 202,
+        "schoolName": "Beauxbatons",
+        "country": "France",
+        "house": "Papillonlisse",
+        "color": "Pink, Silver",
+        "logo": "Butterfly",
+        "comment": "아름다움과 예술성을 강조한다.",
+        "coordinates": {
+            "latitude": 46.64075030926224,
+            "longitude": 2.475299826793599
+        },
+        "imageNameSchool": "Beauxbatons",
+        "imageNameHouse": "Papillonlisse"
+    },
+    {
+        "id" : 203,
+        "schoolName": "Beauxbatons",
+        "country": "France",
+        "house": "Serpentard",
+        "color": "Green, Gold",
+        "logo": "Snake",
+        "comment": "지혜와 계산적인 사고를 중요시한다.",
+        "coordinates": {
+            "latitude": 46.64075030926224,
+            "longitude": 2.475299826793599
+        },
+        "imageNameSchool": "Beauxbatons",
+        "imageNameHouse": "Serpentard"
+    },
+    {
+        "id" : 204,
+        "schoolName": "Beauxbatons",
+        "country": "France",
+        "house": "Chêne",
+        "color": "White, Gold",
+        "logo": "Lily",
+        "comment": "단결과 공동체 의식을 소중히 여긴다.",
+        "coordinates": {
+            "latitude": 46.64075030926224,
+            "longitude": 2.475299826793599
+        },
+        "imageNameSchool": "Beauxbatons",
+        "imageNameHouse": "Chêne"
+    },
+    
+    {
+        "id" : 301,
+        "schoolName": "Durmstrang",
+        "country": "Scotland",
+        "house": "Krokodili",
+        "color": "Blue, Silver",
+        "logo": "Crocerdile",
+        "comment": "강인함과 독창성을 강조한다.",
+        "coordinates": {
+            "latitude": 56.98447136817837,
+            "longitude": -4.35907391577851
+        },
+        "imageNameSchool": "Durmstrang",
+        "imageNameHouse": "Krokodili"
+    },
+    {
+        "id" : 302,
+        "schoolName": "Durmstrang",
+        "country": "Scotland",
+        "house": "Vrkota",
+        "color": "Orange, Black",
+        "logo": "Wolf",
+        "comment": "전통과 명예를 중요시한다.",
+        "coordinates": {
+            "latitude": 56.98447136817837,
+            "longitude": -4.35907391577851
+        },
+        "imageNameSchool": "Durmstrang",
+        "imageNameHouse": "Vrkota"
+    },
+    {
+        "id" : 303,
+        "schoolName": "Durmstrang",
+        "country": "Scotland",
+        "house": "Semenov",
+        "color": "Black, Red",
+        "logo": "Eagle",
+        "comment": "지혜와 실용성을 중시한다.",
+        "coordinates": {
+            "latitude": 56.98447136817837,
+            "longitude": -4.35907391577851
+        },
+        "imageNameSchool": "Durmstrang",
+        "imageNameHouse": "Semenov"
+    },
+]
