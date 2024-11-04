@@ -38,19 +38,6 @@ class ImageViewModel: ObservableObject {
             data = try Data(contentsOf: fileURL)
             let jsonData = try JSONDecoder().decode(T.self, from: data)
             
-            // Mirror를 사용하여 T의 프로퍼티들을 반복하면서 이미지 파일 확인
-            let mirror = Mirror(reflecting: jsonData)
-            for child in mirror.children {
-                if let value = child.value as? String {
-                    if UIImage(named: value) != nil {
-                        image = value // 파일이 존재하면 해당 이미지 설정
-                    } else {
-                        image = "defaultHouse" // 파일이 없으면 기본 이미지 설정
-                    }
-                    break
-                }
-            }
-            
             return jsonData
         } catch {
             fatalError("Cannot read file in Main Bundle")

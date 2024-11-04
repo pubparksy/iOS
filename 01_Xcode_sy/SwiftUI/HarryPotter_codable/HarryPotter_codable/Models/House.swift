@@ -22,7 +22,12 @@ struct House: Hashable, Codable { // id가 없으면 Hashable
     }
     private var houseImgName:String
     var houseImg:Image{
-        Image(houseImgName) // 없으면... house.lodge.fill로 하고 싶음...
+        if UIImage(named: houseImgName) != nil {
+            Image(houseImgName)
+        } else {
+            Image("defaultHouse")
+        }
+        
     }
     
     

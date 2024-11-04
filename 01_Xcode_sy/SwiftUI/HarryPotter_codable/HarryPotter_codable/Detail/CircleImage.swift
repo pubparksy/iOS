@@ -12,5 +12,6 @@ struct CircleImage: View {
 }
 
 #Preview {
-    CircleImage(image: houses[0].houseImg)
+//    CircleImage(image: houses[0].houseImg)
+    CircleImage(image: houses[5].houseImg)
 }
