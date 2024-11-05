@@ -22,13 +22,14 @@ class LangTableViewController: UITableViewController {
                     "Ocp-Apim-Subscription-Key": apiKey,
                     "Ocp-Apim-Subscription-Region":"eastus"
                 ]
-                let body:[[String: String]] = [["Text": query]]
-                let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
+                let body:[[String: String]] = [["Text": query]] // [1] 아하 나는 보내는 body는,  Model에 struct로 추가를 안한거군!
+                let jsonData = try JSONSerialization.data(withJSONObject: body, options: []) // 그래서 JSONEncoder 말고 Serialization 쓴거군.
+                // 또는 encoding, AF에 바로 바꿔주는? 그런게 있다함
                 
                 // 요청 생성
                 var request = URLRequest(url: URL(string: endPoint)!)
                 request.httpMethod = "POST"
-                request.headers = headers
+                request.headers = headers   // [2] 그리고 여기 기존에 강사님이 가르쳐 주셨던건, request.addValue(value, forHTTPHeaderField: key)
                 request.httpBody = jsonData
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 
@@ -41,6 +42,7 @@ class LangTableViewController: UITableViewController {
                         DispatchQueue.main.async {
                             self.tableView.reloadData() // 테이블 뷰 새로고침
                         }
+                        
                     case .failure(let error):
                         print("에러 발생: \(error.localizedDescription)")
                     }
